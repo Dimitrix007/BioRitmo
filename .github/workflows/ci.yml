@@ -40,4 +40,6 @@ jobs:
 
       - name: Executar testes com pytest
         working-directory: backend
+        env:
+          PYTHONPATH: .
         run: pytest app/tests/ -v --tb=short
