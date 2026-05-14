@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioRitmo — Gestão de Saúde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SIDEBAR                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">💚</div>
+    <span>Bio<em>Ritmo</em></span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-label">Principal</div>
+    <div class="nav-item active" data-page="dashboard">
+      <span class="nav-icon">📊</span> Dashboard
+    </div>
+
+    <div class="nav-label">Registros</div>
+    <div class="nav-item" data-page="meals">
+      <span class="nav-icon">🍽️</span> Refeições
+    </div>
+    <div class="nav-item" data-page="exercises">
+      <span class="nav-icon">🏋️</span> Exercícios
+    </div>
+    <div class="nav-item" data-page="weight">
+      <span class="nav-icon">⚖️</span> Peso Corporal
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">BioRitmo v1.0.0 · MIT</div>
+</aside>
+
+<div class="sidebar-mask"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MAIN                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="main">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="burger-btn" id="burger-btn">☰</button>
+      <span class="topbar-title" id="topbar-title">📊 Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <span class="date-badge" id="today-date"></span>
+    </div>
+  </header>
+
+  <div class="page-content">
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  PAGE: DASHBOARD                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="page active" id="page-dashboard">
+      <div class="section-header">
+        <div>
+          <h2>Resumo do Dia</h2>
+          <p>Acompanhe seu balanço calórico, hidratação e evolução de peso</p>
+        </div>
+        <div class="filter-bar" style="margin:0">
+          <input type="date" id="dash-date" />
+        </div>
+      </div>
+
+      <!-- Row 1: Caloric balance -->
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Consumidas</span>
+            <div class="card-icon yellow">🍽️</div>
+          </div>
+          <div class="card-value" id="dash-consumed">— kcal</div>
+          <div class="card-sub">Calorias ingeridas</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Queimadas</span>
+            <div class="card-icon red">🔥</div>
+          </div>
+          <div class="card-value" id="dash-burned">— kcal</div>
+          <div class="card-sub">Via exercícios</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Saldo Calórico</span>
+            <div class="card-icon green">⚡</div>
+          </div>
+          <div class="card-value" id="dash-balance">— kcal</div>
+          <div class="card-sub">Consumidas − Queimadas</div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Atividades</span>
+            <div class="card-icon blue">📋</div>
+          </div>
+          <div class="card-value">
+            <span id="dash-meals">—</span>
+            <span style="font-size:1rem;color:var(--text-muted)"> / </span>
+            <span id="dash-exercises">—</span>
+          </div>
+          <div class="card-sub">Refeições / Exercícios</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Water + Weight chart -->
+      <div class="grid-2">
+
+        <!-- Water card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">💧 Hidratação</span>
+            <span class="badge badge-blue" id="dash-water-pct">0%</span>
+          </div>
+          <div class="card-value" id="dash-water-consumed">0.00 L</div>
+          <div class="card-sub" id="dash-water-goal">Meta: 2.0 L</div>
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span>Progresso</span>
+              <span id="dash-water-remaining">Restam: 2.00 L</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill blue" id="water-fill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weight chart card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">⚖️ Evolução do Peso</span>
+            <button class="btn btn-ghost btn-sm" onclick="document.querySelector('[data-page=weight]').click()">Ver todos</button>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="weightChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /page-dashboard -->
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  PAGE: MEALS                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="page" id="page-meals">
+      <div class="section-header">
+        <div>
+          <h2>Refeições</h2>
+          <p>Registre e gerencie tudo que você comeu</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-meal">
+          + Nova Refeição
+        </button>
+      </div>
+
+      <div class="filter-bar">
+        <input type="date" id="meal-filter-date" placeholder="Filtrar por data" />
+        <button class="btn btn-ghost btn-sm" id="btn-clear-meal-filter">Limpar filtro</button>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Refeição</th>
+              <th>Calorias</th>
+              <th>Água</th>
+              <th>Data/Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="meals-tbody">
+            <tr><td colspan="5"><div class="loading-state"><div class="spinner"></div> Carregando...</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /page-meals -->
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  PAGE: EXERCISES                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="page" id="page-exercises">
+      <div class="section-header">
+        <div>
+          <h2>Exercícios</h2>
+          <p>Monitore suas atividades físicas e calorias queimadas</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-exercise">
+          + Novo Exercício
+        </button>
+      </div>
+
+      <div class="filter-bar">
+        <input type="date" id="exercise-filter-date" placeholder="Filtrar por data" />
+        <button class="btn btn-ghost btn-sm" id="btn-clear-exercise-filter">Limpar filtro</button>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Exercício</th>
+              <th>Queimadas</th>
+              <th>Duração</th>
+              <th>Data/Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="exercises-tbody">
+            <tr><td colspan="5"><div class="loading-state"><div class="spinner"></div> Carregando...</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /page-exercises -->
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  PAGE: WEIGHT                                          -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="page" id="page-weight">
+      <div class="section-header">
+        <div>
+          <h2>Peso Corporal</h2>
+          <p>Acompanhe sua evolução e tendência de peso</p>
+        </div>
+        <button class="btn btn-primary" id="btn-add-weight">
+          + Novo Registro
+        </button>
+      </div>
+
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header">
+          <span class="card-title">⚖️ Gráfico de Evolução</span>
+        </div>
+        <div class="chart-wrap" style="height:260px">
+          <canvas id="weightChartPage"></canvas>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="date" id="weight-filter-date" />
+        <button class="btn btn-ghost btn-sm" id="btn-clear-weight-filter">Limpar filtro</button>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Peso</th>
+              <th>Variação</th>
+              <th>Data/Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="weight-tbody">
+            <tr><td colspan="4"><div class="loading-state"><div class="spinner"></div> Carregando...</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /page-weight -->
+
+  </div><!-- /page-content -->
+</div><!-- /main -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: MEAL                                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="meal-modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="meal-modal-title">Nova Refeição</h3>
+      <button class="modal-close" data-close-modal="meal-modal-overlay">✕</button>
+    </div>
+    <form id="meal-form">
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label for="meal-name">Nome da refeição *</label>
+          <input id="meal-name" type="text" placeholder="Ex: Almoço, Café da manhã..." required maxlength="100" />
+        </div>
+        <div class="form-group form-full">
+          <label for="meal-desc">Descrição</label>
+          <textarea id="meal-desc" placeholder="O que você comeu? (opcional)"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="meal-calories">Calorias (kcal) *</label>
+          <input id="meal-calories" type="number" min="1" step="0.1" placeholder="Ex: 500" required />
+        </div>
+        <div class="form-group">
+          <label for="meal-water">Água ingerida (ml)</label>
+          <input id="meal-water" type="number" min="0" step="1" placeholder="Ex: 300" value="0" />
+        </div>
+        <div class="form-group form-full">
+          <label for="meal-logged-at">Data e horário *</label>
+          <input id="meal-logged-at" type="datetime-local" required />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal="meal-modal-overlay">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="meal-submit-btn">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: EXERCISE                                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="exercise-modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="exercise-modal-title">Novo Exercício</h3>
+      <button class="modal-close" data-close-modal="exercise-modal-overlay">✕</button>
+    </div>
+    <form id="exercise-form">
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label for="exercise-name">Nome do exercício *</label>
+          <input id="exercise-name" type="text" placeholder="Ex: Corrida, Musculação..." required maxlength="100" />
+        </div>
+        <div class="form-group form-full">
+          <label for="exercise-desc">Descrição</label>
+          <textarea id="exercise-desc" placeholder="Detalhes do exercício (opcional)"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exercise-calories">Calorias queimadas (kcal) *</label>
+          <input id="exercise-calories" type="number" min="0.1" step="0.1" placeholder="Ex: 350" required />
+        </div>
+        <div class="form-group">
+          <label for="exercise-duration">Duração (minutos) *</label>
+          <input id="exercise-duration" type="number" min="0.1" step="0.1" placeholder="Ex: 45" required />
+        </div>
+        <div class="form-group form-full">
+          <label for="exercise-logged-at">Data e horário *</label>
+          <input id="exercise-logged-at" type="datetime-local" required />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal="exercise-modal-overlay">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="exercise-submit-btn">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: WEIGHT                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="weight-modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="weight-modal-title">Novo Registro de Peso</h3>
+      <button class="modal-close" data-close-modal="weight-modal-overlay">✕</button>
+    </div>
+    <form id="weight-form">
+      <div class="form-grid">
+        <div class="form-group form-full">
+          <label for="weight-kg">Peso atual (kg) *</label>
+          <input id="weight-kg" type="number" min="1" max="499" step="0.1" placeholder="Ex: 75.5" required />
+        </div>
+        <div class="form-group form-full">
+          <label for="weight-logged-at">Data e horário *</label>
+          <input id="weight-logged-at" type="datetime-local" required />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal="weight-modal-overlay">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="weight-submit-btn">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  MODAL: CONFIRM                                             -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="confirm-overlay">
+  <div class="confirm-dialog">
+    <h3>⚠️ Confirmar ação</h3>
+    <p id="confirm-message">Tem certeza?</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" id="confirm-no">Cancelar</button>
+      <button class="btn btn-danger" id="confirm-yes">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  TOAST CONTAINER                                            -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="toast-container"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  SCRIPTS                                                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>
