@@ -1,0 +1,1 @@
+"""BioRitmo backend application package."""
