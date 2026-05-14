@@ -12,9 +12,6 @@ backend/venv/
 # Ruff
 .ruff_cache/
 
-# Database
-*.db
-
 # VSCode
 .vscode/
 
