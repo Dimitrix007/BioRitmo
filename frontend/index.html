@@ -299,6 +299,29 @@
           <label for="meal-desc">Descrição</label>
           <textarea id="meal-desc" placeholder="O que você comeu? (opcional)"></textarea>
         </div>
+
+<!-- Busca nutricional via Open Food Facts -->
+<div class="food-search-container">
+  <div class="food-search-row">
+    <input
+      type="text"
+      id="food-search-input"
+      class="food-search-input"
+      placeholder="🔍 Buscar alimento (ex: banana, arroz, frango)..."
+      autocomplete="off"
+    />
+    <button
+      type="button"
+      id="btn-food-search"
+      class="btn-food-search"
+      onclick="searchFoodNutrition()"
+    >
+      Buscar
+    </button>
+  </div>
+  <div id="food-search-results" class="food-search-results hidden"></div>
+</div>
+
         <div class="form-group">
           <label for="meal-calories">Calorias (kcal) *</label>
           <input id="meal-calories" type="number" min="1" step="0.1" placeholder="Ex: 500" required />
@@ -411,6 +434,7 @@
 <!--  SCRIPTS                                                    -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <script type="module" src="js/app.js"></script>
+<script type="module" src="js/food_search.js"></script>  
 
 </body>
 </html>

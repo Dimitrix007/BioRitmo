@@ -6,8 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database.database import init_db
-from .routes import dashboard, exercises, meals, weight
-
+from .routes import meals, exercises, weight, dashboard, foods
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -35,6 +34,7 @@ app.include_router(meals.router, prefix="/api/v1")
 app.include_router(exercises.router, prefix="/api/v1")
 app.include_router(weight.router, prefix="/api/v1")
 app.include_router(dashboard.router, prefix="/api/v1")
+app.include_router(foods.router)
 
 
 @app.get("/", tags=["root"])
