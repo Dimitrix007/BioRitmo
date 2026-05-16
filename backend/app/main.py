@@ -17,11 +17,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="BioRitmo API",
-    description="API para gestão de saúde: balanço calórico, hidratação e peso corporal.",
-    version="1.0.0",
-    lifespan=lifespan,
+    description="Plataforma pessoal de gestão de saúde",
+    version="1.1.0",
+    contact={
+        "name": "Dimitri Rafael Gomes Batista",          # ✅ troque para seu nome
+        "url": "https://github.com/Dimitrix007",
+    },
 )
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

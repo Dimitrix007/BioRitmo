@@ -3,8 +3,11 @@
  * All fetch calls go through here.
  */
 
-const BASE_URL = 'http://localhost:8000/api/v1';
-
+const API_BASE = window.location.hostname === "localhost" ||
+                 window.location.hostname === "127.0.0.1"
+  ? "http://127.0.0.1:8000"
+  : "https://bioritmo-api.onrender.com";
+  
 async function request(method, path, body = null) {
   const opts = {
     method,
