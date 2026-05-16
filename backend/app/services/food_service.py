@@ -1,14 +1,15 @@
 # backend/app/services/food_service.py
 
+from typing import Any
+
 import httpx
-from typing import List, Dict, Any
 
 OPENFOODFACTS_URL = "https://world.openfoodfacts.org/cgi/search.pl"
 
 FIELDS = "product_name,nutriments,brands,image_url,categories_tags"
 
 
-async def search_foods(query: str, page_size: int = 6) -> List[Dict[str, Any]]:
+async def search_foods(query: str, page_size: int = 6) -> list[dict[str, Any]]:
     """
     Busca alimentos na Open Food Facts API pelo nome.
 

@@ -10,8 +10,9 @@ Este módulo valida que:
 4. A API externa pode ser contactada diretamente (teste real — requer internet)
 """
 
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -187,6 +188,7 @@ async def test_integracao_real_open_food_facts():
     Requer conexão com a internet. Tolerante a falhas da API externa.
     """
     import httpx
+
     from app.services.food_service import search_foods
 
     try:
@@ -197,5 +199,5 @@ async def test_integracao_real_open_food_facts():
             assert results[0]["calories_per_100g"] > 0
     except httpx.HTTPStatusError as e:
         pytest.skip(f"API externa indisponível (HTTP {e.response.status_code}) — teste ignorado")
-    except httpx.RequestError as e:
-        pytest.skip(f"Sem conexão com a API externa — teste ignorado")
+    except httpx.RequestError:
+        pytest.skip("Sem conexão com a API externa — teste ignorado")

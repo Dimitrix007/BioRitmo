@@ -1,6 +1,7 @@
 # backend/app/routes/foods.py
 
 from fastapi import APIRouter, HTTPException, Query
+
 from app.services.food_service import search_foods
 
 router = APIRouter(prefix="/api/v1/foods", tags=["foods"])

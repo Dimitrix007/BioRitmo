@@ -6,7 +6,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database.database import init_db
-from .routes import meals, exercises, weight, dashboard, foods
+from .routes import dashboard, exercises, foods, meals, weight
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
