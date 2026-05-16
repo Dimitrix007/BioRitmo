@@ -15,7 +15,7 @@ async function request(method, path, body = null) {
   };
   if (body) opts.body = JSON.stringify(body);
 
-  const res = await fetch(`${BASE_URL}${path}`, opts);
+const res = await fetch(`${API_BASE}${path}`, opts);
 
   if (res.status === 204) return null;
 
