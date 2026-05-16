@@ -15,7 +15,7 @@ async function request(method, path, body = null) {
   };
   if (body) opts.body = JSON.stringify(body);
 
-const res = await fetch(`${API_BASE}${path}`, opts);
+  const res = await fetch(`${API_BASE}${path}`, opts);
 
   if (res.status === 204) return null;
 
@@ -31,34 +31,34 @@ const res = await fetch(`${API_BASE}${path}`, opts);
 
 // ─── Meals ────────────────────────────────────────────────────
 export const MealAPI = {
-  list:   (date = '') => request('GET', `/meals/${date ? `?date=${date}` : ''}`),
-  get:    (id)        => request('GET', `/meals/${id}`),
-  create: (body)      => request('POST', '/meals/', body),
-  update: (id, body)  => request('PUT', `/meals/${id}`, body),
-  delete: (id)        => request('DELETE', `/meals/${id}`),
+  list:   (date = '') => request('GET', `/api/v1/meals/${date ? `?date=${date}` : ''}`),
+  get:    (id)        => request('GET', `/api/v1/meals/${id}`),
+  create: (body)      => request('POST', '/api/v1/meals/', body),
+  update: (id, body)  => request('PUT', `/api/v1/meals/${id}`, body),
+  delete: (id)        => request('DELETE', `/api/v1/meals/${id}`),
 };
 
 // ─── Exercises ────────────────────────────────────────────────
 export const ExerciseAPI = {
-  list:   (date = '') => request('GET', `/exercises/${date ? `?date=${date}` : ''}`),
-  get:    (id)        => request('GET', `/exercises/${id}`),
-  create: (body)      => request('POST', '/exercises/', body),
-  update: (id, body)  => request('PUT', `/exercises/${id}`, body),
-  delete: (id)        => request('DELETE', `/exercises/${id}`),
+  list:   (date = '') => request('GET', `/api/v1/exercises/${date ? `?date=${date}` : ''}`),
+  get:    (id)        => request('GET', `/api/v1/exercises/${id}`),
+  create: (body)      => request('POST', '/api/v1/exercises/', body),
+  update: (id, body)  => request('PUT', `/api/v1/exercises/${id}`, body),
+  delete: (id)        => request('DELETE', `/api/v1/exercises/${id}`),
 };
 
 // ─── Weight ───────────────────────────────────────────────────
 export const WeightAPI = {
-  list:   (date = '') => request('GET', `/weight/${date ? `?date=${date}` : ''}`),
-  get:    (id)        => request('GET', `/weight/${id}`),
-  create: (body)      => request('POST', '/weight/', body),
-  update: (id, body)  => request('PUT', `/weight/${id}`, body),
-  delete: (id)        => request('DELETE', `/weight/${id}`),
+  list:   (date = '') => request('GET', `/api/v1/weight/${date ? `?date=${date}` : ''}`),
+  get:    (id)        => request('GET', `/api/v1/weight/${id}`),
+  create: (body)      => request('POST', '/api/v1/weight/', body),
+  update: (id, body)  => request('PUT', `/api/v1/weight/${id}`, body),
+  delete: (id)        => request('DELETE', `/api/v1/weight/${id}`),
 };
 
 // ─── Dashboard ────────────────────────────────────────────────
 export const DashboardAPI = {
-  summary: (date = '') => request('GET', `/dashboard/summary${date ? `?target_date=${date}` : ''}`),
+  summary: (date = '') => request('GET', `/api/v1/dashboard/summary${date ? `?target_date=${date}` : ''}`),
 };
 
 // ─── Busca nutricional via Open Food Facts (intermediada pelo backend) ───────
