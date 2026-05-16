@@ -9,6 +9,7 @@
 [![Version](https://img.shields.io/badge/version-1.1.0-blue)](VERSION)
 
 > 🌐 **Aplicação online:** [https://bio-ritmo-seven.vercel.app](https://bio-ritmo-seven.vercel.app)
+> 
 > ⚡ **API online:** [https://bioritmo-api.onrender.com/docs](https://bioritmo-api.onrender.com/docs)
 
 Plataforma pessoal de gestão de saúde focada em balanço calórico, hidratação, monitoramento de hábitos e acompanhamento de peso corporal.
