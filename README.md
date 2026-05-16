@@ -8,6 +8,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](VERSION)
 
+🌐 **Aplicação online:** [https://bio-ritmo-seven.vercel.app](https://bio-ritmo-seven.vercel.app)  
+> ⚡ **API online:** [https://bioritmo-api.onrender.com/docs](https://bioritmo-api.onrender.com/docs)
+
 > **Plataforma pessoal de gestão de saúde** focada em balanço calórico, hidratação, monitoramento de hábitos e acompanhamento de peso corporal.
 
 ---
