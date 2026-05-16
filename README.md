@@ -1,18 +1,21 @@
 # 💚 BioRitmo
 
-[![CI](https://github.com/Dimitrix007/BioRitmo/actions/workflows/ci.yml/badge.svg)](https://github.com/Dimitrix007/BioRitmo/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite&logoColor=white)](https://sqlite.org)
-[![Ruff](https://img.shields.io/badge/lint-Ruff-D7FF64?logo=ruff&logoColor=black)](https://docs.astral.sh/ruff/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](VERSION)
+[![CI](https://github.com/Dimitrix007/BioRitmo/actions/workflows/ci.yml/badge.svg)](https://github.com/Dimitrix007/BioRitmo/actions)
 
-🌐 **Aplicação online:** [https://bio-ritmo-seven.vercel.app](https://bio-ritmo-seven.vercel.app)  
+> 🌐 **Aplicação online:** [https://bioritmo.vercel.app](https://bioritmo.vercel.app)  
 > ⚡ **API online:** [https://bioritmo-api.onrender.com/docs](https://bioritmo-api.onrender.com/docs)
 
-> **Plataforma pessoal de gestão de saúde** focada em balanço calórico, hidratação, monitoramento de hábitos e acompanhamento de peso corporal.
+Plataforma pessoal de gestão de saúde focada em balanço calórico,
+hidratação, monitoramento de hábitos e acompanhamento de peso corporal.
 
+## 🆕 v1.1.0 — Novidades
+
+- 🔍 **Busca Nutricional** — integração com Open Food Facts API
+  - Pesquise qualquer alimento pelo nome
+  - Informações nutricionais reais (calorias, proteínas, carboidratos, gorduras)
+  - Preenchimento automático do formulário de refeições
+
+[... resto do README existente ...]
 ---
 
 # 📋 Descrição do Problema
@@ -325,7 +328,7 @@ Padrão utilizado:
 
 # 👤 Autor
 
-Desenvolvido por **Marcos André Camargo Belo**
+Desenvolvido por **Dimitri Rafael Gomes Batista**
 
 GitHub:
 [Dimitrix007 GitHub](https://github.com/Dimitrix007?utm_source=chatgpt.com)
