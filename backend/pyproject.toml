@@ -31,11 +31,6 @@ target-version = "py311"
 select = ["E", "F", "W", "I", "N", "UP"]
 ignore = ["E501"]
 
-
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
 testpaths = ["app/tests"]
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-python_functions = ["test_*"]
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
